@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1385271283 source:h:\codeblocks\projects\datastruct_tree\main.cpp
+	"stdio.h"
+	"stdlib.h"
+

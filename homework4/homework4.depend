@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1383753557 source:h:\codeblocks\projects\homework4\main.cpp
+	"stdio.h"
+	"stdlib.h"
+	"time.h"
+
