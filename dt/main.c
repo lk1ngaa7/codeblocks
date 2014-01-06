@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+typedef struct V{
+   char p;
+}M[10];
 int main()
 {
-
-    int i; float x;
-    x= 3.6;
-    i = (int)x;
-    printf("%f\n%o\n",x,i);
+   M m;
+   printf("%d",sizeof(m));
     return 0;
 
 }

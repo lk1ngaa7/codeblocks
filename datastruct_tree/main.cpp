@@ -6,7 +6,7 @@ typedef struct Tree{
      struct Tree *Rchild;
 }treeNode,*BTree;
 typedef struct Stack_tree{
-     BTree s[10];
+     BTree s[20];
      int top;
 }St;
 int Create_Pre(BTree &T);
@@ -27,11 +27,15 @@ void TraPre_re(BTree &T);
 void TraMid_re(BTree &T);
 /** 递归后序遍历  ***/
 void TraPost_re(BTree &T);
+int Compute_tree(BTree &T);
 int main(){
     BTree t;
+    //St* s = calloc(sizeof(St),1);
+    int num=0;
     // 按前序的规则生成一棵二叉树
     if(!Create_Pre(t)||t==NULL)
         exit(0);
+    /*
     printf("\nPreview Traverse\n");
     TraPre(t);
 
@@ -39,6 +43,20 @@ int main(){
 
     printf("\nPreview Traverse after exchange\n");
     TraPre(t);
+    */
+    printf("\nDeepth:%d\n",Compute_tree(t));
+}
+int Compute_tree(BTree &T){
+       if(T == NULL)
+        return 0;
+       else{
+        int l = Compute_tree(T->Lchild);
+        l++;
+        int r = Compute_tree(T->Rchild);
+        r++;
+        return l>=r?l:r;
+
+       }
 }
 BTree getTop(St *&S){
     if(S->top == 0)
