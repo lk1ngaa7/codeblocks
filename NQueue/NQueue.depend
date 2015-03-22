@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1416736979 source:h:\codeblocks\projects\nqueue\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+

@@ -1,0 +1,187 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+typedef struct{
+   int x;
+   int y;
+}N;
+int main()
+{   int  re[4] = {1,2,3,4};
+    //generateDots(1000);
+    //computeShortestDistance(re);
+    /*int *t;
+    t =(int*)malloc(sizeof(int)*2);
+    t[0] = 1;
+    t[1] = 2;
+    test(t);*/
+    sortData();
+    //printf("\nx:%d\ty:%d\nx:%d\ty:%d",re[0],re[1],re[2],re[3]);
+}
+double  shortestDis(N *data,int length,N *n1 , N *n2){
+    int pre,last,middle;
+    int i , j;
+    N* dataP;
+    N* dataL;
+    N tn1,tn2;
+    double dis1 ,dis2;
+    if(lenght   ==  2 ){
+      double dis1 = (data[0].x - data[1].x) * (data[0].x - data[1].x)   -  (data[0].y - data[1].y) * (data[0].y - data[1].y);
+       *n1 = data[0];
+       *n2 = data[1];
+       return  dis1;
+    }else if(length == 3){
+     double dis1 = (data[0].x - data[1].x) * (data[0].x - data[1].x)   -  (data[0].y - data[1].y) * (data[0].y - data[1].y);
+     double dis2 = (data[1].x - data[2].x) * (data[1].x - data[2].x)   -  (data[1].y - data[2].y) * (data[1].y - data[2].y);
+     double dis3 = (data[0].x - data[2].x) * (data[0].x - data[2].x)   -  (data[0].y - data[2].y) * (data[0].y - data[2].y);
+     double temp =  dis1 < dis2?dis1:dis2;
+     temp = temp < dis3 ?temp : dis3;
+     switch(temp){
+        case dis1: *n1 = data[0];n2 = data[1];break;
+        case dis2: *n1 = data[1];n2 = data[2];break;
+        case dis3: *n1 = data[0];n2 = data[2];break;
+     }
+     return temp;
+    }
+   middle =length/2;
+   pre = middle;
+   last  = middle - pre;
+   dataP = (N*)malloc(sizeof(N)*pre);
+   dataL = (N*)malloc(sizeof(N)*last);
+
+    for( i  = 0;i < pre ;i++)
+      dataP[i] = data[i];
+    for( i = 0; i< last;i++)
+     dataL[i] = data[i+pre];
+  dis1  = shortestDis(dataP,pre,n1,n2);
+   dis2 = shortestDis(dataL , last , &tn1,&tn2);
+dis1 = dis1 < dis2 ? dis1 : dis2 ;
+Mergedis(data,dis1);
+
+}
+void MergeSort(N* data, double dis){
+
+}
+
+void test(int *p)
+{
+   int temp;
+  temp = p[0];
+  p[0] = p[1];
+  p[1] = temp;
+
+}
+void sortData(){
+   N *data;
+   FILE *fo;
+   int i;
+   data = (int *)malloc(sizeof(N)*1000);
+   if(!(fo = fopen("data.txt","r"))){
+       printf("open file fail");
+       exit(1);
+     }
+   for(i = 0;i< 1000;i++){
+     fscanf(fo,"%d %d",&data[i].x,&data[i].y);
+  }
+   fclose(fo);
+   MergeSort(data,1000);
+  if(!(fo = fopen("dataSorted.txt","w"))){
+       printf("open file fail");
+       exit(1);
+     }
+    for(i = 0;i< 1000;i++){
+     fprintf(fo,"%d %d\n",data[i].x,data[i].y);
+  }
+
+}
+void  MergeSort(N q[],int num){
+     int i,nump,numl;
+     N* qPre;
+     N* qLast;
+     if(num == 1 )
+        return;
+     if(num%2&&num != 2){
+        numl = num/2;
+        nump = num/2;
+       nump++;
+     }else{
+        numl = num/2;
+        nump = num/2;
+     }
+     qPre  = (N*)malloc(sizeof(N)*nump);
+     qLast = (N*)malloc(sizeof(N)*numl);
+     for(i = 0;i < nump;i++)
+       qPre[i] = q[i];
+     for(i = 0;i<numl;i++)
+      qLast[i] = q[nump+i];
+     MergeSort(qPre,nump);
+     MergeSort(qLast,numl);
+     Merge(qPre,qLast,q,nump,numl);
+}
+void Merge(N *pre,N *last,N *total,int nump,int numl){
+    int i = 0,j = 0,k = 0;
+    while( i< nump && j< numl ){
+       if(pre[i].x > last[j].x ){
+           total[k++] = pre[i++];
+      }else{
+           total[k++] = last[j++];
+      }
+
+    }
+    if(i  == nump){
+     for(i = j; i < numl; i++)
+       total[k++] = last[i];
+    }else{
+      for(j = i; j < nump; j++)
+       total[k++] = pre[j];
+    }
+
+}
+void  computeShortestDistance(int result[2]){
+      FILE *fo;
+      int i,j,l = 0;
+      int *datax,*datay;
+      double dis = 666666,temp;
+      if(!(fo = fopen("data.txt","r"))){
+       printf("open file fail");
+       exit(1);
+     }
+     datax = (int*)malloc(sizeof(int)*1000);
+     datay = (int*)malloc(sizeof(int)*1000);
+     for(i  =0; i<1000 ;i++){
+       fscanf(fo,"%d %d",&datax[i],&datay[i]);
+     }
+
+     for(i = 0;i<1000;i++){
+
+     for(j = i+1;j<1000;j++)
+        if((temp = (datax[i] - datax[j])*(datax[i] - datax[j]) + (datay[i] - datay[j])*(datay[i] - datay[j])) < dis){
+            dis = temp;
+            result[0] = datax[i];
+            result[1] = datay[i];
+            result[2] = datax[j];
+            result[3] = datay[j];
+        }
+    }
+   printf("shortest dis: %f",sqrt(dis));
+
+}
+void  generateDots(int number){
+    FILE *fo;
+    int i,n1,n2;
+    if(!(fo = fopen("data.txt","w"))){
+      printf("open file fail");
+      exit(1);
+   }
+   for(i = 0;i< number;i++){
+      srand((i*i));
+      n1 =rand()%8000;
+      srand(time(NULL)*i*i);
+      n2 = rand()%6000;
+      if(i%2)
+      fprintf(fo,"%d %d\n",n1,n2);
+      else
+      fprintf(fo,"%d %d\n",n2,n1);
+   }
+   fclose(fo);
+}
+

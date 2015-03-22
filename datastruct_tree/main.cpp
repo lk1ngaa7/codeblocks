@@ -27,7 +27,10 @@ void TraPre_re(BTree &T);
 void TraMid_re(BTree &T);
 /** 递归后序遍历  ***/
 void TraPost_re(BTree &T);
+/**  计算二叉树深度  */
 int Compute_tree(BTree &T);
+/**   计算二叉树节点数目  */
+int ComputeNode(BTree &T);
 int main(){
     BTree t;
     //St* s = calloc(sizeof(St),1);
@@ -44,7 +47,7 @@ int main(){
     printf("\nPreview Traverse after exchange\n");
     TraPre(t);
     */
-    printf("\nDeepth:%d\n",Compute_tree(t));
+    printf("\nNumbers:%d\n",ComputeNode(t));
 }
 int Compute_tree(BTree &T){
        if(T == NULL)
@@ -57,6 +60,19 @@ int Compute_tree(BTree &T){
         return l>=r?l:r;
 
        }
+}
+/****
+   算法描述：
+   1. 一棵树的节点数等于左右两棵子树的节点数之和
+   2. 空树的节点数为0
+
+*/
+int ComputeNode(BTree &T){
+    if(T == NULL)
+        return 0;
+    else
+        return ComputeNode(T->Lchild) + ComputeNode(T->Rchild) + 1;
+
 }
 BTree getTop(St *&S){
     if(S->top == 0)

@@ -75,6 +75,10 @@ void init(Le &L,int **&P,Graph &G){
                         {-1,-1,-1,-1,-1,3},{-1,-1,-1,-1,-1,-1}};
      int vextnum = 6;
      int i,j;
+	 /*
+	   calloc 与 malloc 之间的区别是
+	   calloc 申请到空间后会清空，而 malloc申请的空间是垃圾数据
+	 */
      G = (Graph)calloc(sizeof(g),1);
      G->p = (int**)malloc(sizeof(int*)*6);
      P = (int**)malloc(sizeof(int*)*6);
@@ -155,9 +159,3 @@ void pathGen(int **&Path,int pre,int later){
   }
 
 }
-
-
-
-
-
-

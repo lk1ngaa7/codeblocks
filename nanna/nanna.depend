@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1353751060 source:h:\codeblocks\projects\nanna\main.c
+	<stdio.h>
+	<stdlib.h>
+
