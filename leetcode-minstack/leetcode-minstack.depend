@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1429349921 source:h:\codeblocks\projects\leetcode-minstack\main.c
+	<stdio.h>
+	<stdlib.h>
+

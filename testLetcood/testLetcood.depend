@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1429860383 source:h:\codeblocks\projects\testletcood\main.c
+	<stdio.h>
+	<stdlib.h>
+
